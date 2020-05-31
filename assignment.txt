@@ -1,0 +1,17 @@
+Create an application with a news feed. Show the latest articles when a user opens the page. 
+A user should be able to set filters before a new search. 
+Amongst filters should be: search by phrase, select a category, select a country.
+
+
+
+A website using a framework
+
+Main requirements for the examination task:
+
+Build the application on Vue.js 
+Use any CSS framework of your choice (Bootstrap, Bulma, etc.) or write your own styles
+Realize functionality using your API (individual)
+The application has to be responsive and look good on mobile devices
+Deploy the application on GitHub pages or a web hosting
+Optimize the application to have at least 85 points on PageSpeed Insights, both mobile and desktop
+You can use any additional sources you need. You can add additional functionality using other features of the selected API, that is optional.

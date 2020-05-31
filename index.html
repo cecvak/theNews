@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/index.css">
+    <script src="https://kit.fontawesome.com/19c75b59f6.js" crossorigin="anonymous"></script>
+
+    <title>Document</title>
+</head>
+<body>
+  <div id="vue-app1">
+
+    <!-- <nav class="navbar navbar-default navbar-fixed-top"> -->
+    <div class="container fixed-top">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <a class="navbar-brand" href="#">Logo</a>
+      <!-- <div class="container"> -->
+        <!-- <div class="navbar-header"> -->
+          <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+        <!-- </div> -->
+        <div class="collapse navbar-collapse navbar-toggleable-sm" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#home">HOME <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">ABOUT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <div class="jumbotron text-center">
+        <h1>Latest News</h1>
+        <p>The top headlines from accross the web</p>
+      </div>
+    </div>
+
+    
+      <!-- container for main grid, articlees and filters -->
+      <div class="container"> 
+
+        <h3>Latest articles</h3>
+        <!-- <p>Country: {{ selected_country.text }} Category: {{ selected_category.text }} Search phrase: {{ phrase }}</p> -->
+        <div class="row">
+          <div class="col-sm-3 order-md-last">
+            <h2>Filter results</h2>
+
+            <div class="input-group mb-3">
+              <!-- <label for="search-input">By search phrase</label> -->
+              <input type="text" class="form-control" placeholder="Type a search phrase" aria-label="Search phrase" 
+                  aria-describedby="basic-addon2" v-model="phrase" v-on:keyup.enter="filter" id="search-input">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" v-on:click="filter">Search</button>
+              </div>
+            </div>
+
+            <label for="select-category">By category</label>
+            <select v-model="selected_category" class="form-control custom-select" id="select-category">
+              <!-- <option selected>Select a category</option> -->
+              <option v-for="category in categories" v-bind:value="category.value" >
+                {{ category.text }}
+              </option>
+            </select>
+            <!-- <span>Selected: {{ selected_category }}</span> -->
+
+            <label for="select-country">By country</label>
+            <select v-model="selected_country" class="form-control custom-select" id="select-country" >
+              <option v-for="country in countries" v-bind:value="country.value">
+                {{ country.text }}
+              </option>
+            </select>
+
+            <!-- <label for="select-lang">By language</label>
+            <select v-model="selected_language" class="form-control" id="select-lang">
+              <option v-for="lang in languages" v-bind:value="lang.value">
+                {{ lang.text }}
+              </option>
+            </select> -->
+
+            <p>Results: {{numberOfResults }}. Showing: Max 20</p>
+          </div>
+          <div class="col-sm-9">
+              <!-- <div class="row">
+              <div class="col-lg-4 col-md-6 col-xl-3" v-for="newsItem in articles"> -->
+            <div class="card border-top-0 border-right-0 border-left-0 mb-3"  v-for="newsItem in updateArray">
+              <div class="row no-gutters">
+                <div class="col-sm-4">
+                  <img v-bind:src="newsItem.image" @error ="errorImage"  alt="..." style="max-width: 100%;" 
+                    
+                    >
+                </div>
+                <div class="col-sm-8">
+                  <div class="card-body pt-0 ">
+                    <h5 class="card-title">{{ newsItem.title }}</h5>
+                    <p class="card-text small mb-0">{{ newsItem.source }}</p>
+                    <p class="card-text small ">{{ newsItem.date }} </p>
+                    <!-- <p class="card-text small">{{ newsItem.author }}</p> -->
+                    <p class="card-text">{{ newsItem.descr }}</p>
+                    <a :href="newsItem.url" target="_blank">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
+                    <!-- <p class="card-text">{{newsItem.url}}</p> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+              <!-- </div>
+            </div> -->
+          </div>
+            
+
+            
+        </div>
+      </div>
+    </div> 
+
+    
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" 
+  crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" 
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+
+  <script src="src/main.js"></script>
+</body>
+</html>
