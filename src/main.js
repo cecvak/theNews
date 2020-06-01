@@ -195,6 +195,7 @@ const app = new Vue({
         // let firstCountry = this.selected_country;
         fetch('http://newsapi.org/v2/top-headlines?' +
         'country=' +this.selected_country
+        +'&pageSize=10'
         +'&apiKey=50dce6ab2c4f473d968a3208f0ec52ca')
         .then(response => response.json())
         // .then(json => console.log(json))

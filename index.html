@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,800&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/19c75b59f6.js" crossorigin="anonymous"></script>
 
     <title>Document</title>
@@ -15,8 +16,8 @@
 
     <!-- <nav class="navbar navbar-default navbar-fixed-top"> -->
     <div class="container fixed-top">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-        <a class="navbar-brand" href="#">Logo</a>
+      <nav class="navbar navbar-expand-lg navbar-dark" >
+        <a class="navbar-brand" href="#home">The News</a>
       <!-- <div class="container"> -->
         <!-- <div class="navbar-header"> -->
           <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -25,8 +26,8 @@
           </button>
           
         <!-- </div> -->
-        <div class="collapse navbar-collapse navbar-toggleable-sm" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
+        <div class="collapse navbar-collapse navbar-toggleable-sm justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav  ">
             <li class="nav-item active">
               <a class="nav-link" href="#home">HOME <span class="sr-only">(current)</span></a>
             </li>
@@ -38,12 +39,12 @@
       </nav>
     </div>
 
-    <div class="container">
-      <div class="jumbotron text-center">
-        <h1>Latest News</h1>
-        <p>The top headlines from accross the web</p>
+      <div class="container">
+        <div class="jumbotron text-center mt-5 mb-5" id="home">
+          <h1>The Latest News</h1>
+          <p>The top headlines from accross the web</p>
+        </div>
       </div>
-    </div>
 
     
       <!-- container for main grid, articlees and filters -->
@@ -103,7 +104,7 @@
                   <div class="card-body pt-0 ">
                     <h5 class="card-title">{{ newsItem.title }}</h5>
                     <p class="card-text small mb-0">{{ newsItem.source }}</p>
-                    <p class="card-text small ">{{ newsItem.date }} </p>
+                    <p class="card-text small ">Published: {{ newsItem.date }} </p>
                     <!-- <p class="card-text small">{{ newsItem.author }}</p> -->
                     <p class="card-text">{{ newsItem.descr }}</p>
                     <a :href="newsItem.url" target="_blank">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
@@ -115,11 +116,18 @@
               <!-- </div>
             </div> -->
           </div>
-            
-
-            
         </div>
       </div>
+
+      <div class="container text-center mt-5 mb-5" id="about">
+        <h2>About</h2>
+        <p>Article information collected using API from newsapi.org. Page built using vue.js and Bootstrap.</p>
+      </div>
+
+      <footer class="container text-center ">
+        <a href="#home"><i class="fas fa-chevron-up"></i></a>
+        <p class="mb-0 pb-1 pt-1">The News</p>
+      </footer>
     </div> 
 
     
