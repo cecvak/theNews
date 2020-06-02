@@ -1,13 +1,20 @@
+$('body').scrollspy({ target: '#navbarSupportedContent' })
+
+Vue.use(VueLazyload, {
+    // error: 'https://image.flaticon.com/icons/png/512/8/8798.png'
+    // error: '../assets/images/no-image-icon.jpg'
+
+
+})
+
 const app = new Vue({
     el: '#vue-app1',
     data: {
+        isActive: false,
         articles: [],
-        // article2: [],
 
         numberOfResults: '',
         phrase: '',
-
-        // selected_categories: [],
 
         selected_category: '',
         categories: [
@@ -78,36 +85,15 @@ const app = new Vue({
             { text: 'Venezuela', value: 've'},
             { text: 'South Africa', value: 'za'},
         ],
-        // selected_language: '',
-        // languages: [
-        //     { text: 'All', value: ''},
-        //     { text: 'Arabic' , value: 'ar'},
-        //     { text: 'German', value: 'de' },
-        //     { text: 'English', value: 'en'},
-        //     { text: 'Spanish', value: 'es'},
-        //     { text: 'French', value: 'fr' },
-        //     { text: 'Hebrew', value: 'he' },
-        //     { text: 'Italian', value: 'it' },
-        //     { text: 'Dutch', value: 'nl' },
-        //     { text: 'Norwegian', value: 'no' },
-        //     { text: 'Portuguese', value: 'pt' },
-        //     { text: 'Russian', value: 'ru' },
-        //     { text: 'Swedish', value: 'se' },
-        //     { text: 'Urdu', value: 'ud' },
-        //     { text: 'Chinese', value: 'zh' },
-        // ]
+
     },
     computed: {
+
         updateArray: function() {
-            // return this.articles.slice(0).reverse();
-            // return this.articles.publishedAt.slice(0).reverse();
             return this.articles.map( (a) => {
-                // a.changeDate = this.articles.publishedAt.replace('T', '');
-                // return a
                 let updated = {};
                 updated.title = a.title;
                 updated.author = a.author;
-                // updated.source = a.source.name;
                 if (a.source.name.startsWith("Www")) {
                     updated.source = a.source.name.replace('W', 'w');
                 }
@@ -116,100 +102,74 @@ const app = new Vue({
                 updated.url = a.url;
 
                 if (a.urlToImage == null) {
-                    updated.image = 'https://image.flaticon.com/icons/png/512/8/8798.png';
+                    // updated.image = 'https://image.flaticon.com/icons/png/512/8/8798.png';
+                    updated.image = '../assets/images/no-image-icon.jpg';
                 }
                 else {
                     updated.image = a.urlToImage;
                 }
                 
                 updated.date = a.publishedAt.replace(/T|Z/g,' ');
-                // console.log(updated.date);
                 let newDate = moment.utc(updated.date).format('YYYY-MM-DD HH:mm:ss');
-                // console.log(newDate);
                 let newDateUtc = moment.utc(newDate).toDate();
-                // console.log(newDateUtc);
                 let localDate = moment(newDateUtc).local().format('YYYY-MM-DD HH:mm:ss');
-                // console.log(localDate);
                 updated.date = localDate;
                 return updated;
             })
-
-            
-            // return this.articles.publishedAt.replace('T, Z', '');
+        },
+        sortedCountries: function() {
+            function compare(a, b) {
+                if (a.text < b.text)
+                    return -1;
+                if (a.text > b.text)
+                    return 1;
+                return 0;
+            }
+            return this.countries.sort(compare)
+        
         },
     },
     methods: {
         filter() {
-                        // console.log(this.phrase)
-                        // console.log(this.selected_categories)
-                        let searchPhrase = this.phrase;
-                        // let searchCategory = this.selected_categories.toString();
-                        // console.log(this.selected_categories)
-                        let filterCategory = this.selected_category;
-                        let filterCountry = this.selected_country;
-                        // let filterLang = this.selected_language;
-                        // for (item of this.selected_categories) {
-                        //     searchCategory = item + ',';
-                        // }
-                        console.log(searchPhrase)
-                        // console.log(searchCategory)
-                        
+            let searchPhrase = this.phrase;
+            let filterCategory = this.selected_category;
+            let filterCountry = this.selected_country;
 
-
-                        fetch ('https://newsapi.org/v2/top-headlines?q=' +searchPhrase 
-                                                                        +'&category=' +filterCategory 
-                                                                        +'&country=' +filterCountry
-                                                                        // +'&pageSize=30'
-                                                                        // +'&page=2'
-                                                                        // +'&language=' +filterLang
-                                                                        +'&apiKey=50dce6ab2c4f473d968a3208f0ec52ca')
-                        .then(response =>  response.json())
-                        .then(searchResp => {
-                            if (searchResp.code == "parametersMissing") {
-                                alert('Please enter a search phrase, or a category/country to search.');
-                            }
-                            else {
-                                this.articles = searchResp.articles;
-                                this.numberOfResults = searchResp.totalResults;
-                                // console.log(this.articles);
-                            }
-                       
+            fetch ('https://newsapi.org/v2/top-headlines?q=' +searchPhrase 
+                                                            +'&category=' +filterCategory 
+                                                            +'&country=' +filterCountry
+                                                            +'&pageSize=20'
+                                                            +'&apiKey=50dce6ab2c4f473d968a3208f0ec52ca')
+            .then(response =>  response.json())
+            .then(searchResp => {
+                if (searchResp.code == "parametersMissing") {
+                    // alert('Please enter a search phrase, or a category/country to search.');
+                    this.isActive = true;
+                }
+                else {
+                    this.articles = searchResp.articles;
+                    this.numberOfResults = searchResp.totalResults;
+                    this.isActive = false;
+                }  
                     })
-                    },
+        },
         errorImage(event) {
-            // this.articles.urlToImage = '/../assets/images/news_logo.png';
-            // this.changeDate.image = 'https://www.freepik.com/free-icon/error-advice-triangle-with-exclamation-mark_703014.htm#page=1&query=error&position=35';
-            // this.changeDate.image = 'https://image.flaticon.com/icons/png/512/8/8798.png';
-            event.target.src = 'https://image.flaticon.com/icons/png/512/8/8798.png'
-            // event.target.src = '/../assets/images/news_logo.png';
-            // let image;
-            // image.src = '/../assets/images/news_logo.png';
-            // articles.urlToImage = image;
-        }         
+            // event.target.src = 'https://image.flaticon.com/icons/png/512/8/8798.png'
+            event.target.src = '../assets/images/no-image-icon.jpg';
 
+        },
     },
+
     mounted: function() {
-        // let firstCountry = 'us';
-        // this.selected_country = 'us';
-        // this.selected_category = '';
-        // let firstCountry = this.selected_country;
-        fetch('http://newsapi.org/v2/top-headlines?' +
-        'country=' +this.selected_country
-        +'&pageSize=10'
-        +'&apiKey=50dce6ab2c4f473d968a3208f0ec52ca')
-        .then(response => response.json())
-        // .then(json => console.log(json))
-        .then(articlesResp => {
-            // var vm = this;
-            // vm.data.articles = articlesResp;
-            this.articles = articlesResp.articles;
-            
-            // console.log(this.articles);
-            // console.log(typeof this.articles)
-        })
+        this.filter();
+        // fetch('http://newsapi.org/v2/top-headlines?' +
+        // 'country=' +this.selected_country
+        // +'&pageSize=20'
+        // +'&apiKey=50dce6ab2c4f473d968a3208f0ec52ca')
+        // .then(response => response.json())
+        // .then(articlesResp => {
+        //     this.articles = articlesResp.articles;
+        // })
     },
 
 })
-
-
-// https://newsapi.org/v2/everything?q=bitcoin&apiKey=50dce6ab2c4f473d968a3208f0ec52ca

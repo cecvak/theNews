@@ -1,8 +1,13 @@
+body {
+    position: relative;
+}
+
 .jumbotron {
-    /* background-color: #f4511e; Orange */
-    background: linear-gradient(90deg, rgba(101,165,196,1) 0%, rgba(10,96,174,1) 50%, rgba(10,96,174,1) 100%);
+    /* background: linear-gradient(90deg, rgba(101,165,196,1) 0%, rgba(10,96,174,1) 50%, rgba(10,96,174,1) 100%); */
+    /* background: linear-gradient(37deg, rgba(101,165,196,1) 0%, rgba(10,96,174,1) 100%); */
+    background-color: #4C627F;
     font-family: 'Open Sans', sans-serif;
-    color: #14131F;
+    color: #E9E4E6;
   }
 
 .jumbotron h1 {
@@ -15,13 +20,13 @@
 }
 
 .navbar {
-    background: linear-gradient(90deg, rgba(101,165,196,1) 0%, rgba(10,96,174,1) 50%, rgba(10,96,174,1) 100%);
+    /* background: linear-gradient(90deg, rgba(101,165,196,1) 0%, rgba(10,96,174,1) 50%, rgba(10,96,174,1) 100%); */
+    background-color: #4C627F;
     font-family: 'Open Sans', sans-serif;
-    /* color: #14131F !important; */
 }
 
 .nav-link {
-color: #14131F !important;
+color: #E9E4E6 !important;
 }
 
 .active>.nav-link {
@@ -32,24 +37,20 @@ color: #14131F !important;
     color: #65A5C4 !important;
 }
 
-  /* .navbar-dark .navbar-nav .nav-link  {
-    color: #14131F !important;
-  } */
-
 .navbar-brand {
     font-family: 'Open Sans', sans-serif;
     font-weight: 800;
     font-size: 30px;
     font-style: italic;
-    color: #14131F !important;
+    color: #E9E4E6 !important;
 }
 
-
 footer {
-    background: linear-gradient(90deg, rgba(101,165,196,1) 0%, rgba(10,96,174,1) 50%, rgba(10,96,174,1) 100%);
+    /* background: linear-gradient(90deg, rgba(101,165,196,1) 0%, rgba(10,96,174,1) 50%, rgba(10,96,174,1) 100%); */
+    background-color: #4C627F;
     font-family: 'Open Sans', sans-serif;
     font-weight: 800;
     font-size: 30px;
     font-style: italic;
-    color: #14131F !important;
+    color: #E9E4E6 !important;
 }
