@@ -109,10 +109,15 @@ const app = new Vue({
                     updated.image = a.urlToImage;
                 }
                 
-                updated.date = a.publishedAt.replace(/T|Z/g,' ');
+                // updated.date = a.publishedAt.replace(/T|Z/g,' ');
+                updated.date = a.publishedAt;
+                // console.log(a.publishedAt)
                 let newDate = moment.utc(updated.date).format('YYYY-MM-DD HH:mm:ss');
+                // console.log(newDate);
                 let newDateUtc = moment.utc(newDate).toDate();
+                // console.log(newDateUtc);
                 let localDate = moment(newDateUtc).local().format('YYYY-MM-DD HH:mm:ss');
+                // console.log(localDate);
                 updated.date = localDate;
                 return updated;
             })

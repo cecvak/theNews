@@ -30,7 +30,7 @@ color: #E9E4E6 !important;
 }
 
 .active>.nav-link {
-    font-weight: bold;
+    font-weight: bold !important;
 }
 
 .navbar-nav li a:hover {
