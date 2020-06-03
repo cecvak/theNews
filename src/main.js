@@ -103,7 +103,7 @@ const app = new Vue({
 
                 if (a.urlToImage == null) {
                     // updated.image = 'https://image.flaticon.com/icons/png/512/8/8798.png';
-                    updated.image = '../assets/images/no-image-icon.jpg';
+                    updated.image = '../assets/images/noimage.png';
                 }
                 else {
                     updated.image = a.urlToImage;
@@ -160,12 +160,12 @@ const app = new Vue({
         },
         errorImage(event) {
             // event.target.src = 'https://image.flaticon.com/icons/png/512/8/8798.png'
-            event.target.src = '../assets/images/no-image-icon.jpg';
+            event.target.src = '../assets/images/noimage.png';
 
         },
     },
 
-    mounted: function() {
+    created: function() {
         this.filter();
         // fetch('http://newsapi.org/v2/top-headlines?' +
         // 'country=' +this.selected_country
